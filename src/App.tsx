@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { LanguageProvider, useLanguage } from './i18n/LanguageContext';
+import { useTranslation } from 'react-i18next';
 import { PRODUCTS } from './data/products';
 import type { CategoryFilter, AvailabilityFilter } from './data/products';
 import SearchBar from './components/SearchBar';
@@ -7,8 +7,8 @@ import FilterSidebar from './components/FilterSidebar';
 import ProductCard from './components/ProductCard';
 import './App.css';
 
-const CatalogContent: React.FC = () => {
-  const { t } = useLanguage();
+const App: React.FC = () => {
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>('all');
   const [selectedAvailability, setSelectedAvailability] = useState<AvailabilityFilter>('all');
@@ -73,14 +73,6 @@ const CatalogContent: React.FC = () => {
         </main>
       </div>
     </div>
-  );
-};
-
-const App: React.FC = () => {
-  return (
-    <LanguageProvider>
-      <CatalogContent />
-    </LanguageProvider>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLanguage } from '../i18n/LanguageContext';
+import { useTranslation } from 'react-i18next';
 import LanguageDropdown from './LanguageDropdown';
 
 interface SearchBarProps {
@@ -8,7 +8,7 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ searchQuery, onSearchChange }) => {
-  const { t } = useLanguage();
+  const { t } = useTranslation();
 
   return (
     <header className="top-search-bar">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLanguage } from '../i18n/LanguageContext';
+import { useTranslation } from 'react-i18next';
 import type { CategoryFilter, AvailabilityFilter } from '../data/products';
 
 interface FilterSidebarProps {
@@ -19,7 +19,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
   warehouseChecked,
   onWarehouseChange,
 }) => {
-  const { t } = useLanguage();
+  const { t } = useTranslation();
 
   const categories: { value: CategoryFilter; label: string }[] = [
     { value: 'all', label: t('cat_all') },

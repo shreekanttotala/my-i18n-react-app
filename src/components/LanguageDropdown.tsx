@@ -1,12 +1,14 @@
 import React from 'react';
-import { useLanguage } from '../i18n/LanguageContext';
-import type { Language } from '../i18n/types';
+import { useTranslation } from 'react-i18next';
+import type { SupportedLanguage } from '../i18n/config';
 
 const LanguageDropdown: React.FC = () => {
-  const { language, setLanguage, t } = useLanguage();
+  const { t, i18n } = useTranslation();
+
+  const currentLanguage = (i18n.resolvedLanguage || 'en') as SupportedLanguage;
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setLanguage(e.target.value as Language);
+    void i18n.changeLanguage(e.target.value as SupportedLanguage);
   };
 
   return (
@@ -27,7 +29,7 @@ const LanguageDropdown: React.FC = () => {
       <select
         aria-label={t('language_label')}
         className="language-select"
-        value={language}
+        value={currentLanguage}
         onChange={handleChange}
       >
         <option value="en">{t('lang_en')}</option>

@@ -1,4 +1,4 @@
-import type { TranslationDictionary } from '../i18n/types';
+import type { TranslationKey } from '../i18n/config';
 
 export type CategoryFilter =
   | 'all'
@@ -18,8 +18,8 @@ export type StockStatus = 'in_stock' | 'low_stock' | 'out_of_stock';
 
 export interface Product {
   id: string;
-  titleKey: keyof TranslationDictionary;
-  subtitleKey: keyof TranslationDictionary;
+  titleKey: TranslationKey;
+  subtitleKey: TranslationKey;
   sku: string;
   price: string;
   category: Exclude<CategoryFilter, 'all'>;
@@ -30,7 +30,7 @@ export interface Product {
     en: string;
     de: string;
   };
-  substituteKey?: keyof TranslationDictionary;
+  substituteKey?: TranslationKey;
   visualType: 'cable' | 'junction_box' | 'splitter' | 'kit' | 'conduit';
 }
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useLanguage } from '../i18n/LanguageContext';
+import { useTranslation } from 'react-i18next';
 import type { Product } from '../data/products';
+import type { SupportedLanguage } from '../i18n/config';
 
 interface ProductCardProps {
   product: Product;
@@ -40,8 +41,10 @@ const ProductVisual: React.FC<{ type: Product['visualType'] }> = ({ type }) => {
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { language, t } = useLanguage();
+  const { t, i18n } = useTranslation();
   const [added, setAdded] = useState<boolean>(false);
+
+  const currentLang = (i18n.resolvedLanguage || 'en') as SupportedLanguage;
 
   const handleAddToOrder = () => {
     setAdded(true);
@@ -97,7 +100,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <line x1="8" y1="2" x2="8" y2="6" />
             <line x1="3" y1="10" x2="21" y2="10" />
           </svg>
-          <span>{t('restock_date', { date: product.restockDate[language] })}</span>
+          <span>{t('restock_date', { date: product.restockDate[currentLang] })}</span>
         </div>
       )}
 
