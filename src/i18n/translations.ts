@@ -4,5 +4,5 @@ import type { Language, TranslationDictionary } from './types';
 
 export const translations: Record<Language, TranslationDictionary> = {
   en,
-  de
+  de,
 };

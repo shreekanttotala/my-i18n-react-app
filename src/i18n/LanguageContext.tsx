@@ -6,7 +6,10 @@ import type { Language, TranslationDictionary } from './types';
 interface LanguageContextProps {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: keyof TranslationDictionary) => string;
+  t: (
+    key: keyof TranslationDictionary,
+    params?: Record<string, string | number>
+  ) => string;
 }
 
 const LanguageContext = createContext<LanguageContextProps | undefined>(undefined);
@@ -18,8 +21,17 @@ interface LanguageProviderProps {
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const [language, setLanguage] = useState<Language>('en');
 
-  const t = (key: keyof TranslationDictionary): string => {
-    return translations[language][key] || key;
+  const t = (
+    key: keyof TranslationDictionary,
+    params?: Record<string, string | number>
+  ): string => {
+    let text = translations[language][key] || key;
+    if (params) {
+      Object.entries(params).forEach(([paramKey, value]) => {
+        text = text.replace(`{${paramKey}}`, String(value));
+      });
+    }
+    return text;
   };
 
   return (
